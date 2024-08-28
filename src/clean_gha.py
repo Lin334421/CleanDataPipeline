@@ -1,6 +1,7 @@
 import calendar
 import datetime
 import json
+import os
 import time
 from loguru import logger
 from multiprocessing import Pool
@@ -10,9 +11,11 @@ import configparser
 
 # 创建 ConfigParser 对象
 config = configparser.ConfigParser()
-
 # 读取配置文件
-config.read('config.cfg')  # 假设配置文件名为 config.cfg
+current_dir = os.path.dirname(__file__)
+    # 获取父目录
+parent_dir = os.path.abspath(os.path.join(current_dir, os.pardir))
+config.read(f'{parent_dir}/config/ck_conn.cfg')  # 假设配置文件名为 config.cfg
 logger.add('msg.log')
 
 class CKClient:
@@ -920,6 +923,7 @@ if __name__ == '__main__':
    # # json_names=[['2022-07-01-3.json']]
 
 
-with Pool(15) as pool:
-    pool.map(all_event, json_names)
+    with Pool(15) as pool:
+        pool.map(all_event, json_names)
+
 
