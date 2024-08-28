@@ -1,0 +1,1 @@
+docker build -t clean_data_v0.1 .
