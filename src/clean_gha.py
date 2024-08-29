@@ -15,10 +15,11 @@ from tmpl.gha_event import event_tmpls
 config = configparser.ConfigParser()
 # 读取配置文件
 current_dir = os.path.dirname(__file__)
-    # 获取父目录
+# 获取父目录
 parent_dir = os.path.abspath(os.path.join(current_dir, os.pardir))
 config.read(f'{parent_dir}/config/ck_conn.cfg')  # 假设配置文件名为 config.cfg
 logger.add('msg.log')
+
 
 class CKClient:
     def __init__(self, host, port, user, password, database, settings={}, kwargs={}):
@@ -73,13 +74,17 @@ def get_ck_conn_info(port_info):
     }
 
 
-
 def insert_into_ck(bulk_data, table_name):
     conn_info = get_ck_conn_info('ClickHouseLocal9000')
     ck_client = get_ck_client(conn_info)
     #
     sql_ = f"INSERT INTO TABLE {table_name} VALUES"
-    count = ck_client.execute_with_params(sql_, bulk_data)
+    try:
+        count = ck_client.execute_with_params(sql_, bulk_data)
+    except Exception as e:
+        with open(f'{parent_dir}/bad_data/bad_data.json') as f:
+            json.dump(bulk_data, f)
+        raise e
     logger.info(f'successfully inserted into ck {table_name} lines count: {count}')
     ck_client.close()
 
@@ -94,9 +99,6 @@ def get_index_name(index_name):
     return result
 
 
-
-
-
 def all_event(file_names):
     parents_dir = '/opt/mission_area/gha_data'
     # parents_dir = '/home/malin'
@@ -107,7 +109,7 @@ def all_event(file_names):
         'pull_request_review_event': [],
         'push_event': [],
         'issues_event': [],
-        'watch_event':[]
+        'watch_event': []
     }
     pr_event_tplt = event_tmpls.get('pull_request_event')
     fork_event_tplt = event_tmpls.get('fork_event')
@@ -266,34 +268,32 @@ def all_event(file_names):
     #     insert_into_ck(watch_bulk_data, 'cleaned_mini_watch_event')
 
 
-
-
-
 if __name__ == '__main__':
     json_names = []
 
-    year = 2024
+    years = config['DATA_TIME']['year'].split(',')
+    months = config['DATA_TIME']['month'].split(',')
     # for hour in range(24):
     #     json_names.append(f'2021-01-01-{hour}.json')
-    for month in [5,6,7]:
+    for year in years:
+        year = int(year)
+        for month in months:
+            month = int(month)
+            day_count = calendar.monthrange(year, month)[1]
+            if month < 10:
+                month = '0' + str(month)
+            for day in range(1, day_count + 1):
+                if day < 10:
+                    day = '0' + str(day)
+                one_day_file_name = []
+                for hour in range(24):
+                    logger.info(f'{year}-{month}-{day}-{hour}.json')
+                    one_day_file_name.append(f'{year}-{month}-{day}-{hour}.json')
+                    # logger.info(f'{year}-{month}-{day}-{hour}.json')
+                json_names.append(one_day_file_name)
 
-        day_count = calendar.monthrange(year, month)[1]
-        if month < 10:
-            month = '0' + str(month)
-        for day in range(1, day_count + 1):
-            if day < 10:
-                day = '0' + str(day)
-            one_day_file_name = []
-            for hour in range(24):
-                logger.info(f'{year}-{month}-{day}-{hour}.json')
-                one_day_file_name.append(f'{year}-{month}-{day}-{hour}.json')
-                # logger.info(f'{year}-{month}-{day}-{hour}.json')
-            json_names.append(one_day_file_name)
-
-   # # json_names=[['2022-07-01-3.json']]
-
-
-    with Pool(15) as pool:
-        pool.map(all_event, json_names)
+# # json_names=[['2022-07-01-3.json']]
 
 
+# with Pool(15) as pool:
+#     pool.map(all_event, json_names)
