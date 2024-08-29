@@ -9,11 +9,12 @@ data_parent_path = '/opt/mission_area/gha_data/'
 def un_gzip(gz_filename):
     try:
         filename = gz_filename.replace('.gz', '')
-        g_file = gzip.GzipFile(gz_filename)
+        g_file = gzip.GzipFile(f'{data_parent_path}{gz_filename}')
         open(f'{data_parent_path}{filename}', 'wb+').write(g_file.read())
         g_file.close()
         logger.info(f"successful unzip {gz_filename}")
-    except:
+    except Exception as e:
+        logger.error(e)
         logger.error(f"unzip {gz_filename} failed")
 
 
