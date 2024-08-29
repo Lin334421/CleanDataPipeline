@@ -82,7 +82,7 @@ def insert_into_ck(bulk_data, table_name):
     try:
         count = ck_client.execute_with_params(sql_, bulk_data)
     except Exception as e:
-        with open(f'{parent_dir}/bad_data/bad_data.json') as f:
+        with open(f'{parent_dir}/bad_data/bad_data.json','rw') as f:
             json.dump(bulk_data, f)
         raise e
     logger.info(f'successfully inserted into ck {table_name} lines count: {count}')
