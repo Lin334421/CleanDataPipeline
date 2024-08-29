@@ -277,6 +277,7 @@ current_dir = os.path.dirname(__file__)
 # 获取父目录
 parent_dir = os.path.abspath(os.path.join(current_dir, os.pardir))
 config.read(f'{parent_dir}/config/ck_conn.cfg')  # 假设配置文件名为 config.cfg
+data_parents_dir = config['DATA_PATH']['parents_dir']
 logger.add('msg.log')
 
 
@@ -342,6 +343,9 @@ def insert_into_ck(bulk_data, table_name,file_name=None):
         count = ck_client.execute_with_params(sql_, bulk_data)
     except Exception as e:
         print(file_name,table_name)
+        # with open(f'{parent_dir}/bad_data/bad_data.json','w') as f:
+        #     f.write(bulk_data)
+        print(bulk_data)
         raise e
     logger.info(f'successfully inserted into ck {table_name} lines count: {count}')
     ck_client.close()
@@ -358,7 +362,6 @@ def get_index_name(index_name):
 
 
 def all_event(file_names):
-    parents_dir = '/opt/mission_area/gha_data'
     # parents_dir = '/home/malin'
     updated_at = int(time.time() * 1000)
     bulk_datas = {
@@ -376,7 +379,7 @@ def all_event(file_names):
     issues_event_tplt = event_tmpls.get('issues_event')
     watch_event_tplt = event_tmpls.get('watch_event')
     for file_name in file_names:
-        with open(f'{parents_dir}/{file_name}', 'r') as f:
+        with open(f'{data_parents_dir}/{file_name}', 'r') as f:
             logger.info(f'开始解析gha ghaname:{file_name}................')
             gh_archive_year = file_name.split('-')[0]
             gh_archive_month = file_name.split('-')[1]
@@ -474,8 +477,14 @@ def all_event(file_names):
                                 urls = []
                                 for commit in commits:
                                     shas.append(commit['sha'])
-                                    author__emails.append(commit['author']['email'])
-                                    author__names.append(commit['author']['name'])
+                                    if commit['author']['email'] is None:
+                                        author__emails.append('')
+                                    else:
+                                        author__emails.append(commit['author']['email'])
+                                    if commit['author']['name'] is None:
+                                        author__names.append('')
+                                    else:
+                                        author__names.append(commit['author']['name'])
                                     messages.append(commit['message'])
                                     distincts.append(str(commit['distinct']))
                                     urls.append(commit['url'])
@@ -497,11 +506,8 @@ def all_event(file_names):
                 # logger.info(need_insert_event_data)
 
                 bulk_data.append(need_insert_event_data)
-                # if len(bulk_data) >= 50000:
-                #     insert_into_ck(bulk_data, table_name)
-                #     # 避免持续占用内存,而不释放
-                #     bulk_data.clear()
-                # return
+
+
             logger.info(f'文件{file_name} 总解析行数:{count}')
         pr_bulk_data = bulk_datas.get('pull_request_event')
         if pr_bulk_data:
@@ -552,11 +558,12 @@ if __name__ == '__main__':
                     day = '0' + str(day)
                 one_day_file_name = []
                 for hour in range(24):
-                    logger.info(f'{year}-{month}-{day}-{hour}.json')
                     one_day_file_name.append(f'{year}-{month}-{day}-{hour}.json')
-                    # logger.info(f'{year}-{month}-{day}-{hour}.json')
                 json_names.append(one_day_file_name)
-
     with Pool(15) as pool:
         pool.map(all_event, json_names)
+
+
+
+
 
