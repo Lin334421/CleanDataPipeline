@@ -292,8 +292,5 @@ if __name__ == '__main__':
                     # logger.info(f'{year}-{month}-{day}-{hour}.json')
                 json_names.append(one_day_file_name)
 
-# # json_names=[['2022-07-01-3.json']]
-
-
-# with Pool(15) as pool:
-#     pool.map(all_event, json_names)
+    with Pool(15) as pool:
+        pool.map(all_event, json_names)
