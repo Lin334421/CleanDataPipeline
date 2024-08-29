@@ -496,7 +496,7 @@ def all_event(file_names):
 
                 # logger.info(need_insert_event_data)
 
-                # bulk_data.append(need_insert_event_data)
+                bulk_data.append(need_insert_event_data)
                 # if len(bulk_data) >= 50000:
                 #     insert_into_ck(bulk_data, table_name)
                 #     # 避免持续占用内存,而不释放
@@ -506,9 +506,11 @@ def all_event(file_names):
         pr_bulk_data = bulk_datas.get('pull_request_event')
         if pr_bulk_data:
             insert_into_ck(pr_bulk_data, 'cleaned_mini_pull_request_event',file_name)
+            pr_bulk_data.clear()
         push_bulk_data = bulk_datas.get('push_event')
         if push_bulk_data:
             insert_into_ck(push_bulk_data, 'cleaned_mini_push_event_v3',file_name)
+            push_bulk_data.clear()
     # 插入数据库
     # pr_bulk_data = bulk_datas.get('pull_request_event')
     # fork_bulk_data = bulk_datas.get('fork_event')
