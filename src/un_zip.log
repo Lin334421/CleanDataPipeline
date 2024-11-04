@@ -1,0 +1,44 @@
+2024-10-09 11:22:00.614 | ERROR    | utils.un_zip_data:un_gzip:23 - [Errno 2] No such file or directory: '/Users/jonas/PycharmProjects/CleanDataPipeline/download_data2024-10-08-7.json.gz'
+2024-10-09 11:22:00.615 | ERROR    | utils.un_zip_data:un_gzip:24 - unzip 2024-10-08-7.json.gz failed
+2024-10-09 11:22:00.615 | ERROR    | utils.un_zip_data:un_gzip:23 - [Errno 2] No such file or directory: '/Users/jonas/PycharmProjects/CleanDataPipeline/download_data2024-10-08-9.json.gz'
+2024-10-09 11:22:00.615 | ERROR    | utils.un_zip_data:un_gzip:24 - unzip 2024-10-08-9.json.gz failed
+2024-10-09 11:22:00.615 | ERROR    | utils.un_zip_data:un_gzip:23 - [Errno 2] No such file or directory: '/Users/jonas/PycharmProjects/CleanDataPipeline/download_data2024-10-08-6.json.gz'
+2024-10-09 11:22:00.615 | ERROR    | utils.un_zip_data:un_gzip:24 - unzip 2024-10-08-6.json.gz failed
+2024-10-09 11:22:00.615 | ERROR    | utils.un_zip_data:un_gzip:23 - [Errno 2] No such file or directory: '/Users/jonas/PycharmProjects/CleanDataPipeline/download_data2024-10-08-8.json.gz'
+2024-10-09 11:22:00.615 | ERROR    | utils.un_zip_data:un_gzip:24 - unzip 2024-10-08-8.json.gz failed
+2024-10-09 11:28:15.839 | ERROR    | utils.un_zip_data:un_gzip:25 - [Errno 2] No such file or directory: '/Users/jonas/PycharmProjects/CleanDataPipeline/download_data/2024-10-08-7.json.gz'
+2024-10-09 11:28:15.839 | ERROR    | utils.un_zip_data:un_gzip:26 - unzip 2024-10-08-7.json.gz failed
+2024-10-09 11:28:15.839 | ERROR    | utils.un_zip_data:un_gzip:25 - [Errno 2] No such file or directory: '/Users/jonas/PycharmProjects/CleanDataPipeline/download_data/2024-10-08-9.json.gz'
+2024-10-09 11:28:15.839 | ERROR    | utils.un_zip_data:un_gzip:26 - unzip 2024-10-08-9.json.gz failed
+2024-10-09 11:28:15.840 | ERROR    | utils.un_zip_data:un_gzip:25 - [Errno 2] No such file or directory: '/Users/jonas/PycharmProjects/CleanDataPipeline/download_data/2024-10-08-6.json.gz'
+2024-10-09 11:28:15.840 | ERROR    | utils.un_zip_data:un_gzip:26 - unzip 2024-10-08-6.json.gz failed
+2024-10-09 11:28:15.840 | ERROR    | utils.un_zip_data:un_gzip:25 - [Errno 2] No such file or directory: '/Users/jonas/PycharmProjects/CleanDataPipeline/download_data/2024-10-08-8.json.gz'
+2024-10-09 11:28:15.840 | ERROR    | utils.un_zip_data:un_gzip:26 - unzip 2024-10-08-8.json.gz failed
+2024-10-09 11:31:50.036 | INFO     | utils.un_zip_data:un_gzip_v2:38 - successful unzip 2024-10-08-7.json.gz
+2024-10-09 11:31:50.036 | ERROR    | utils.un_zip_data:un_gzip_v2:40 - [Errno 2] No such file or directory: '/Users/jonas/PycharmProjects/CleanDataPipeline/download_data/2024/2024/2024-10-08-9.json.gz'
+2024-10-09 11:31:50.036 | ERROR    | utils.un_zip_data:un_gzip_v2:41 - unzip 2024-10-08-9.json.gz failed
+2024-10-09 11:31:50.036 | ERROR    | utils.un_zip_data:un_gzip_v2:40 - [Errno 2] No such file or directory: '/Users/jonas/PycharmProjects/CleanDataPipeline/download_data/2024/2024/2024/2024-10-08-6.json.gz'
+2024-10-09 11:31:50.036 | ERROR    | utils.un_zip_data:un_gzip_v2:41 - unzip 2024-10-08-6.json.gz failed
+2024-10-09 11:31:50.036 | ERROR    | utils.un_zip_data:un_gzip_v2:40 - [Errno 2] No such file or directory: '/Users/jonas/PycharmProjects/CleanDataPipeline/download_data/2024/2024/2024/2024/2024-10-08-8.json.gz'
+2024-10-09 11:31:50.036 | ERROR    | utils.un_zip_data:un_gzip_v2:41 - unzip 2024-10-08-8.json.gz failed
+2024-10-09 11:33:26.915 | INFO     | utils.un_zip_data:un_gzip_v2:38 - successful unzip 2024-10-08-7.json.gz
+2024-10-09 11:33:28.517 | INFO     | utils.un_zip_data:un_gzip_v2:38 - successful unzip 2024-10-08-9.json.gz
+2024-10-09 11:33:29.772 | INFO     | utils.un_zip_data:un_gzip_v2:38 - successful unzip 2024-10-08-6.json.gz
+2024-10-09 11:33:31.242 | INFO     | utils.un_zip_data:un_gzip_v2:38 - successful unzip 2024-10-08-8.json.gz
+2024-10-09 11:38:38.947 | INFO     | utils.un_zip_data:un_gzip_v2:39 - successful unzip 2024-10-08-7.json.gz
+2024-10-09 11:39:32.654 | INFO     | utils.un_zip_data:un_gzip_v2:39 - successful unzip 2024-10-08-7.json.gz
+2024-10-09 11:39:32.723 | INFO     | src.clean_gha:insert_into_ck:350 - successfully inserted into ck gha_download_insert_state lines count: 1
+2024-10-09 11:39:34.256 | INFO     | utils.un_zip_data:un_gzip_v2:39 - successful unzip 2024-10-08-9.json.gz
+2024-10-09 11:39:34.262 | INFO     | src.clean_gha:insert_into_ck:350 - successfully inserted into ck gha_download_insert_state lines count: 1
+2024-10-09 11:39:35.523 | INFO     | utils.un_zip_data:un_gzip_v2:39 - successful unzip 2024-10-08-6.json.gz
+2024-10-09 11:39:35.532 | INFO     | src.clean_gha:insert_into_ck:350 - successfully inserted into ck gha_download_insert_state lines count: 1
+2024-10-09 11:39:37.040 | INFO     | utils.un_zip_data:un_gzip_v2:39 - successful unzip 2024-10-08-8.json.gz
+2024-10-09 11:39:37.070 | INFO     | src.clean_gha:insert_into_ck:350 - successfully inserted into ck gha_download_insert_state lines count: 1
+2024-10-09 11:39:53.661 | INFO     | utils.un_zip_data:un_gzip_v2:39 - successful unzip 2024-10-08-7.json.gz
+2024-10-09 11:39:53.666 | INFO     | src.clean_gha:insert_into_ck:350 - successfully inserted into ck gha_download_insert_state lines count: 1
+2024-10-09 11:39:55.166 | INFO     | utils.un_zip_data:un_gzip_v2:39 - successful unzip 2024-10-08-9.json.gz
+2024-10-09 11:39:55.171 | INFO     | src.clean_gha:insert_into_ck:350 - successfully inserted into ck gha_download_insert_state lines count: 1
+2024-10-09 11:39:56.384 | INFO     | utils.un_zip_data:un_gzip_v2:39 - successful unzip 2024-10-08-6.json.gz
+2024-10-09 11:39:56.389 | INFO     | src.clean_gha:insert_into_ck:350 - successfully inserted into ck gha_download_insert_state lines count: 1
+2024-10-09 11:39:57.815 | INFO     | utils.un_zip_data:un_gzip_v2:39 - successful unzip 2024-10-08-8.json.gz
+2024-10-09 11:39:57.842 | INFO     | src.clean_gha:insert_into_ck:350 - successfully inserted into ck gha_download_insert_state lines count: 1

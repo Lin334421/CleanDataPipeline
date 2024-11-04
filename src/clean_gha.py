@@ -334,7 +334,7 @@ def get_ck_conn_info(port_info):
     }
 
 
-def insert_into_ck(bulk_data, table_name,file_name=None):
+def insert_into_ck(bulk_data, table_name, file_name=None):
     conn_info = get_ck_conn_info('ClickHouseLocal9000')
     ck_client = get_ck_client(conn_info)
     #
@@ -349,6 +349,7 @@ def insert_into_ck(bulk_data, table_name,file_name=None):
         raise e
     logger.info(f'successfully inserted into ck {table_name} lines count: {count}')
     ck_client.close()
+    return count
 
 
 def get_index_name(index_name):
@@ -428,7 +429,6 @@ def all_event(file_names):
                     event_tplt = pr_event_tplt
                     bulk_data = bulk_datas.get('pull_request_event')
                     table_name = 'cleaned_mini_pull_request_event'
-
                 elif event_type == 'fork_event':
                     event_tplt = fork_event_tplt
                     bulk_data = bulk_datas.get('fork_event')
@@ -511,12 +511,36 @@ def all_event(file_names):
             logger.info(f'文件{file_name} 总解析行数:{count}')
         pr_bulk_data = bulk_datas.get('pull_request_event')
         if pr_bulk_data:
-            insert_into_ck(pr_bulk_data, 'cleaned_mini_pull_request_event',file_name)
+            lines = insert_into_ck(pr_bulk_data, 'cleaned_mini_pull_request_event_v2',file_name)
+            insert_into_ck([{
+                "table_name": "cleaned_mini_pull_request_event_v2",
+                "event":'pull_request_event',
+                "file_name": file_name,
+                "data_insert_at":int(time.time() * 1000),
+                "lines": lines,
+                "year": int(gh_archive_year),
+                "month": int(gh_archive_month),
+                "day":int(gh_archive_day),
+                "hour": int(gh_archive_hour),
+                "is_success":1
+            }], 'gha_event_insert_log',
+            )
+            # 需要等待所有 bulk_data 都插入成功才继续执行
+            # bulk_data = [{
+            #     "year": int(gh_archive_year),
+            #     "month": int(gh_archive_month),
+            #     "day": int(gh_archive_day),
+            #     "hour": int(gh_archive_hour),
+            #     "state": "insert",
+            #     "is_success": 1,
+            #     "data_insert_at": int(time.time() * 1000)
+            # }]
+            # insert_into_ck(bulk_data, 'gha_download_insert_state', file_name)
             pr_bulk_data.clear()
-        push_bulk_data = bulk_datas.get('push_event')
-        if push_bulk_data:
-            insert_into_ck(push_bulk_data, 'cleaned_mini_push_event_v3',file_name)
-            push_bulk_data.clear()
+        # push_bulk_data = bulk_datas.get('push_event')
+        # if push_bulk_data:
+        #     insert_into_ck(push_bulk_data, 'cleaned_mini_push_event_v3',file_name)
+        #     push_bulk_data.clear()
     # 插入数据库
     # pr_bulk_data = bulk_datas.get('pull_request_event')
     # fork_bulk_data = bulk_datas.get('fork_event')
@@ -539,29 +563,28 @@ def all_event(file_names):
     #     insert_into_ck(watch_bulk_data, 'cleaned_mini_watch_event')
 
 
-if __name__ == '__main__':
-    json_names = []
-
-    years = config['DATA_TIME']['year'].split(',')
-    months = config['DATA_TIME']['month'].split(',')
-    # for hour in range(24):
-    #     json_names.append(f'2021-01-01-{hour}.json')
-    for year in years:
-        year = int(year)
-        for month in months:
-            month = int(month)
-            day_count = calendar.monthrange(year, month)[1]
-            if month < 10:
-                month = '0' + str(month)
-            for day in range(1, day_count + 1):
-                if day < 10:
-                    day = '0' + str(day)
-                one_day_file_name = []
-                for hour in range(24):
-                    one_day_file_name.append(f'{year}-{month}-{day}-{hour}.json')
-                json_names.append(one_day_file_name)
-    with Pool(15) as pool:
-        pool.map(all_event, json_names)
+# if __name__ == '__main__':
+#     json_names = []
+#     years = config['DATA_TIME']['year'].split(',')
+#     months = config['DATA_TIME']['month'].split(',')
+#     # for hour in range(24):
+#     #     json_names.append(f'2021-01-01-{hour}.json')
+#     for year in years:
+#         year = int(year)
+#         for month in months:
+#             month = int(month)
+#             day_count = calendar.monthrange(year, month)[1]
+#             if month < 10:
+#                 month = '0' + str(month)
+#             for day in range(1, day_count + 1):
+#                 if day < 10:
+#                     day = '0' + str(day)
+#                 one_day_file_name = []
+#                 for hour in range(24):
+#                     one_day_file_name.append(f'{year}-{month}-{day}-{hour}.json')
+#                 json_names.append(one_day_file_name)
+#     with Pool(15) as pool:
+#         pool.map(all_event, json_names)
 
 
 
