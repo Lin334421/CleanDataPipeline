@@ -5,8 +5,9 @@
     "distributed_key": "halfMD5(id)",
     "table_engine": "ReplicatedReplacingMergeTree('/clickhouse/tables/{shard}/github_action_events','{replica}',search_key_updated_at)",
     "partition_by": [
+        "search_key_event_type",
         "search_key_gh_archive_year",
-        "search_key_event_type"
+        "search_key_gh_archive_month"
     ],
     "order_by": [
         "id"

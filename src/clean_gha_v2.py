@@ -239,7 +239,8 @@ def all_event(file_names):
             logger.info(f'文件{file_name} 总解析行数:{count}')
             # print(bulk_data)
             insert_into_ck(bulk_data, 'github_action_events')
-            bulk_data = [{
+            bulk_data.clear()
+            bulk_state_data = [{
                 "year": int(gh_archive_year),
                 "month": int(gh_archive_month),
                 "day": int(gh_archive_day),
@@ -249,7 +250,7 @@ def all_event(file_names):
                 "insert_state": 1,
                 "data_insert_at": updated_at
             }]
-            insert_into_ck(bulk_data, 'gha_download_insert_state', f'{int(gh_archive_year)}-{int(gh_archive_month)}-{int(gh_archive_day)}-{int(gh_archive_hour)}.json.gz')
+            insert_into_ck(bulk_state_data, 'gha_download_insert_state', f'{int(gh_archive_year)}-{int(gh_archive_month)}-{int(gh_archive_day)}-{int(gh_archive_hour)}.json.gz')
         # clean_file(f'{ConfigManager().get_data_parents_dir()}',file_name)
 
 
