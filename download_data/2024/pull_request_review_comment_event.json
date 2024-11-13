@@ -1,0 +1,170 @@
+{
+  "id": "43580457454",
+  "type": "PullRequestReviewCommentEvent",
+  "actor": {
+    "id": 5151050,
+    "login": "msato-ok"
+  },
+  "repo": {
+    "id": 661911645,
+    "name": "minr-dev/desktop"
+  },
+  "payload": {
+    "action": "created",
+    "comment": {
+      "pull_request_review_id": 2419689208,
+      "id": 1831882087,
+      "node_id": "PRRC_kwDOJ3P4Xc5tME1n",
+      "diff_hunk": "@@ -25,7 +30,7 @@ export class EventEntryCsvServiceImpl implements IEventEntryCsvService {\n       // if(logger.isDebugEnabled()) logger.debug('EventEntryCSV successfully created:', eventEntryCsvData);\n       return eventEntryCsvData;\n     } catch (error) {",
+      "path": "src/main/services/EventEntryCsvServiceImpl.ts",
+      "commit_id": "2c95431d7e6a0c52ce21db38c41c239b87956aa4",
+      "original_commit_id": "2c95431d7e6a0c52ce21db38c41c239b87956aa4",
+      "user": {
+        "login": "msato-ok",
+        "id": 5151050,
+        "node_id": "MDQ6VXNlcjUxNTEwNTA=",
+        "type": "User"
+      },
+      "body": "例外は、上位層で catch しているので、ここでの try catch は不要です。\r\n",
+      "created_at": "2024-11-07T00:13:33Z",
+      "updated_at": "2024-11-07T00:13:44Z",
+      "author_association": "CONTRIBUTOR",
+      "line": 32,
+      "original_line": 32,
+      "side": "RIGHT",
+      "original_position": 19,
+      "position": 19,
+      "subject_type": "line"
+    },
+    "pull_request": {
+      "id": 2148826272,
+      "node_id": "PR_kwDOJ3P4Xc6AFHyg",
+      "number": 183,
+      "state": "open",
+      "title": "feat: #159 予実管理をCSVに出力する(mainプロセス)",
+      "user": {
+        "login": "yanagi-altus5",
+        "id": 77946641,
+        "node_id": "MDQ6VXNlcjc3OTQ2NjQx",
+        "type": "User"
+      },
+      "body": "## チケット\r\n\r\n#159 \r\n\r\n## 実装概要\r\n\r\n1. 設計資料\r\n\r\n* [CSV予実出力_実装設計 - 出力概要](https://altus5.sharepoint.com/:x:/r/sites/raptor/Shared%20Documents/%E4%BD%9C%E6%A5%AD/%E6%9F%B3/%23159%20%E4%BA%88%E5%AE%9F%E7%AE%A1%E7%90%86%E3%82%92CSV%E3%81%AB%E5%87%BA%E5%8A%9B/CSV%E4%BA%88%E5%AE%9F%E7%AE%A1%E7%90%86_%E5%AE%9F%E8%A3%85%E8%A8%AD%E8%A8%88.xlsx?d=w26c6a6e3f675438c8766810768deafaa&csf=1&web=1&e=MV5bBI&nav=MTVfe0I3MDA5MUVBLUIwNEMtNENGMC1BRDk0LUQwMDVBRUI2RDk2Nn0)\r\n\r\n2. 実装について\r\n\r\n* このPRではタスクの分割のため、`main`を実装する。\r\n\r\n* `EventEntry`のlistを修正し、eventTypeからフィルターをかけられるように修正。\r\n    * 理由：EventEntryにeventTypeからフィルターをかける機能はなく、フィルターをかけるためにlistと同じメソッドは作成できないので修正で対応した。\r\n* `Project`, `Category`, `Task`, `Label`のDBサービスに、複数のidから全件を検索する`getAll`を追加。\r\n    * 理由：複数のidから全件を検索する機能はないため新たに追加した。\r\n* mainのクラスは以下の設計書どおりに実装を行った。\r\n    * [クラス設計](https://altus5.sharepoint.com/:x:/r/sites/raptor/Shared%20Documents/%E4%BD%9C%E6%A5%AD/%E6%9F%B3/%23159%20%E4%BA%88%E5%AE%9F%E7%AE%A1%E7%90%86%E3%82%92CSV%E3%81%AB%E5%87%BA%E5%8A%9B/CSV%E4%BA%88%E5%AE%9F%E7%AE%A1%E7%90%86_%E5%AE%9F%E8%A3%85%E8%A8%AD%E8%A8%88.xlsx?d=w26c6a6e3f675438c8766810768deafaa&csf=1&web=1&e=6EXc4o&nav=MTVfe0U3OUU5QTQ4LThGODUtNDFFQy04QkQ3LUM3MkE1MjZBRUQ5Rn0)\r\n    * CSV作成クラスでは、予実以外のヘッダー構成でも出力できるように`CsvFormat.ts`のタイプを参照する実装とした。\r\n* ユニットテストは`予実データ検索`, `CSVデータ出力`の2つを実装した。\r\n",
+      "created_at": "2024-10-28T10:34:11Z",
+      "updated_at": "2024-11-07T00:13:44Z",
+      "closed_at": "2024-11-07T00:13:44Z",
+      "merged_at": "2024-11-07T00:13:44Z",
+      "assignee": {
+        "login": "yanagi-altus5",
+        "id": 77946641,
+        "node_id": "MDQ6VXNlcjc3OTQ2NjQx",
+        "type": "User"
+      },
+      "assignees": [
+        {
+          "login": "yanagi-altus5",
+          "id": 77946641,
+          "node_id": "MDQ6VXNlcjc3OTQ2NjQx",
+          "type": "User"
+        }
+      ],
+      "requested_reviewers": [
+        {
+          "login": "yanagi-altus5",
+          "id": 77946641,
+          "node_id": "MDQ6VXNlcjc3OTQ2NjQx",
+          "type": "User"
+        }
+      ],
+      "merge_commit_sha": "3e1d6a6bcd6aa8b519e8b30b1b8ef26931f7d6ee",
+      "head": {
+        "label": "minr-dev:feature/159/main/EventEntryCsvOutput",
+        "ref": "feature/159/main/EventEntryCsvOutput",
+        "sha": "2c95431d7e6a0c52ce21db38c41c239b87956aa4",
+        "user": {
+          "login": "minr-dev",
+          "id": 117811118,
+          "node_id": "O_kgDOBwWnrg",
+          "type": "Organization"
+        },
+        "repo": {
+          "id": 661911645,
+          "node_id": "R_kgDOJ3P4XQ",
+          "name": "desktop",
+          "full_name": "minr-dev/desktop",
+          "private": false,
+          "owner": {
+            "login": "minr-dev",
+            "id": 117811118,
+            "node_id": "O_kgDOBwWnrg",
+            "type": "Organization"
+          },
+          "fork": false,
+          "created_at": "2023-07-04T00:41:14Z",
+          "updated_at": "2024-10-17T02:22:18Z",
+          "pushed_at": "2024-11-06T00:49:05Z",
+          "stargazers_count": 0,
+          "watchers_count": 0,
+          "language": "TypeScript",
+          "forks_count": 0,
+          "archived": false,
+          "disabled": false,
+          "topics": [
+            ""
+          ],
+          "forks": 0,
+          "watchers": 0,
+          "default_branch": "develop"
+        }
+      },
+      "base": {
+        "label": "minr-dev:feature/159/EventEntryCsvOutput",
+        "ref": "feature/159/EventEntryCsvOutput",
+        "sha": "eb8980e24e735c036be52e7e800d3cb05bd9d1fc",
+        "user": {
+          "login": "minr-dev",
+          "id": 117811118,
+          "node_id": "O_kgDOBwWnrg",
+          "type": "Organization"
+        },
+        "repo": {
+          "id": 661911645,
+          "node_id": "R_kgDOJ3P4XQ",
+          "name": "desktop",
+          "full_name": "minr-dev/desktop",
+          "private": false,
+          "owner": {
+            "login": "minr-dev",
+            "id": 117811118,
+            "node_id": "O_kgDOBwWnrg",
+            "type": "Organization"
+          },
+          "description": "",
+          "fork": false,
+          "created_at": "2023-07-04T00:41:14Z",
+          "updated_at": "2024-10-17T02:22:18Z",
+          "pushed_at": "2024-11-06T00:49:05Z",
+          "size": 1182,
+          "stargazers_count": 0,
+          "watchers_count": 0,
+          "language": "TypeScript",
+          "forks_count": 0,
+          "archived": false,
+          "disabled": false,
+          "topics": [
+            ""
+          ],
+          "forks": 0,
+          "watchers": 0,
+          "default_branch": "develop"
+        }
+      },
+      "author_association": "CONTRIBUTOR"
+    }
+  },
+  "public": true,
+  "created_at": "2024-11-07T00:13:33Z",
+  "org": {
+    "id": 117811118,
+    "login": "minr-dev"
+  }
+}

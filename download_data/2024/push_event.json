@@ -1,0 +1,33 @@
+{
+  "id": "43580455800",
+  "type": "PushEvent",
+  "actor": {
+    "id": 185381720,
+    "login": "jfj12"
+  },
+  "repo": {
+    "id": 874248833,
+    "name": "jfj12/Candida-Albicans-RNA-seq-Project"
+  },
+  "payload": {
+    "repository_id": 874248833,
+    "push_id": 21088678336,
+    "size": 1,
+    "distinct_size": 1,
+    "ref": "refs/heads/main",
+    "head": "f9142daea712e89edfd2f063eeaa26c4e3139b74",
+    "before": "5a52c483a5c9d685de56bdeb6cf2685134d1e25f",
+    "commits": [
+      {
+        "sha": "f9142daea712e89edfd2f063eeaa26c4e3139b74",
+        "author": {
+          "email": "jfj12@georgetown.edu",
+          "name": "jfj12"
+        },
+        "message": "Delete Sequence Data/GCF_000182965.3_ASM18296v3_genomic.fna.gz"
+      }
+    ]
+  },
+  "public": true,
+  "created_at": "2024-11-07T00:13:39Z"
+}

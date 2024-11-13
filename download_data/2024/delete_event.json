@@ -1,0 +1,23 @@
+{
+  "id": "43580452281",
+  "type": "DeleteEvent",
+  "actor": {
+    "id": 100868164,
+    "login": "staging-whitesource-for-github-com[bot]"
+  },
+  "repo": {
+    "id": 884544235,
+    "name": "ghc-automation-staging-parallel-6-p1/8210024_rerun_3_56"
+  },
+  "payload": {
+    "ref": "whitesource/configure",
+    "ref_type": "branch",
+    "pusher_type": "user"
+  },
+  "public": true,
+  "created_at": "2024-11-07T00:13:27Z",
+  "org": {
+    "id": 168725896,
+    "login": "ghc-automation-staging-parallel-6-p1"
+  }
+}

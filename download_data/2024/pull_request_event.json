@@ -1,0 +1,180 @@
+{
+  "id": "43580451696",
+  "type": "PullRequestEvent",
+  "actor": {
+    "id": 41898282,
+    "login": "github-actions[bot]"
+  },
+  "repo": {
+    "id": 31696383,
+    "name": "python/typeshed"
+  },
+  "payload": {
+    "action": "opened",
+    "number": 12967,
+    "pull_request": {
+      "id": 2166293198,
+      "node_id": "PR_kwDOAeOl_86BHwLO",
+      "number": 12967,
+      "state": "open",
+      "title": "[stubsabot] Bump regex to 2024.11.6",
+      "user": {
+        "login": "github-actions[bot]",
+        "id": 41898282,
+        "node_id": "MDM6Qm90NDE4OTgyODI=",
+        "type": "Bot"
+      },
+      "body": "Release: https://pypi.org/pypi/regex/2024.11.6\nHomepage: https://github.com/mrabarnett/mrab-regex\nRepository: https://github.com/mrabarnett/mrab-regex\nTypeshed stubs: https://github.com/python/typeshed/tree/main/stubs/regex\nDiff: https://github.com/mrabarnett/mrab-regex/compare/2024.9.11...2024.11.6\n\nStubsabot analysis of the diff between the two releases:\n - Total lines of Python code added: 12.\n - Total lines of Python code deleted: 2.\n\nIf stubtest fails for this PR:\n- Leave this PR open (as a reminder, and to prevent stubsabot from opening another PR)\n- Fix stubtest failures in another PR, then close this PR\n\nNote that you will need to close and re-open the PR in order to trigger CI\n",
+      "created_at": "2024-11-07T00:13:23Z",
+      "updated_at": "2024-11-07T00:13:24Z",
+      "closed_at": "2024-11-07T00:13:24Z",
+      "merged_at": "2024-11-07T00:13:24Z",
+      "assignee": {
+        "login": "yanagi-altus5",
+        "id": 77946641,
+        "node_id": "MDQ6VXNlcjc3OTQ2NjQx",
+        "type": "User"
+      },
+      "assignees": [
+        {
+          "login": "yanagi-altus5",
+          "id": 77946641,
+          "node_id": "MDQ6VXNlcjc3OTQ2NjQx",
+          "type": "User"
+        }
+      ],
+      "requested_reviewers": [
+        {
+          "login": "yanagi-altus5",
+          "id": 77946641,
+          "node_id": "MDQ6VXNlcjc3OTQ2NjQx",
+          "type": "User"
+        }
+      ],
+      "head": {
+        "label": "python:stubsabot/regex",
+        "ref": "stubsabot/regex",
+        "sha": "37ee2d2bacc224976bb1ab23e4a935841289052d",
+        "user": {
+          "login": "python",
+          "id": 1525981,
+          "node_id": "MDEyOk9yZ2FuaXphdGlvbjE1MjU5ODE=",
+          "type": "Organization"
+        },
+        "repo": {
+          "id": 31696383,
+          "node_id": "MDEwOlJlcG9zaXRvcnkzMTY5NjM4Mw==",
+          "name": "typeshed",
+          "full_name": "python/typeshed",
+          "private": false,
+          "owner": {
+            "login": "python",
+            "id": 1525981,
+            "node_id": "MDEyOk9yZ2FuaXphdGlvbjE1MjU5ODE=",
+            "type": "Organization"
+          },
+          "description": "Collection of library stubs for Python, with static types",
+          "fork": false,
+          "created_at": "2015-03-05T04:51:28Z",
+          "updated_at": "2024-11-06T22:51:54Z",
+          "pushed_at": "2024-11-07T00:13:23Z",
+          "stargazers_count": 4371,
+          "watchers_count": 4371,
+          "language": "Python",
+          "forks_count": 1748,
+          "archived": false,
+          "disabled": false,
+          "open_issues_count": 243,
+          "license": {
+            "key": "other",
+            "name": "Other",
+            "spdx_id": "NOASSERTION",
+            "node_id": "MDc6TGljZW5zZTA="
+          },
+          "topics": [
+            "python",
+            "stub",
+            "types",
+            "typing"
+          ],
+          "forks": 1748,
+          "open_issues": 243,
+          "watchers": 4371,
+          "default_branch": "main"
+        }
+      },
+      "base": {
+        "label": "python:main",
+        "ref": "main",
+        "sha": "3d853d5fa80ca58afe703b1603f4a913900fb02e",
+        "user": {
+          "login": "python",
+          "id": 1525981,
+          "node_id": "MDEyOk9yZ2FuaXphdGlvbjE1MjU5ODE=",
+          "type": "Organization"
+        },
+        "repo": {
+          "id": 31696383,
+          "node_id": "MDEwOlJlcG9zaXRvcnkzMTY5NjM4Mw==",
+          "name": "typeshed",
+          "full_name": "python/typeshed",
+          "private": false,
+          "owner": {
+            "login": "python",
+            "id": 1525981,
+            "node_id": "MDEyOk9yZ2FuaXphdGlvbjE1MjU5ODE=",
+            "type": "Organization"
+          },
+          "description": "Collection of library stubs for Python, with static types",
+          "fork": false,
+          "created_at": "2015-03-05T04:51:28Z",
+          "updated_at": "2024-11-06T22:51:54Z",
+          "pushed_at": "2024-11-07T00:13:23Z",
+          "stargazers_count": 4371,
+          "watchers_count": 4371,
+          "language": "Python",
+          "forks_count": 1748,
+          "archived": false,
+          "disabled": false,
+          "open_issues_count": 243,
+          "license": {
+            "key": "other",
+            "name": "Other",
+            "spdx_id": "NOASSERTION",
+            "node_id": "MDc6TGljZW5zZTA="
+          },
+          "topics": [
+            "python",
+            "stub",
+            "types",
+            "typing"
+          ],
+          "forks": 1748,
+          "open_issues": 243,
+          "watchers": 4371,
+          "default_branch": "main"
+        }
+      },
+      "author_association": "CONTRIBUTOR",
+      "merged": false,
+      "merged_by": {
+        "login": "pgarrison",
+        "id": 5379348,
+        "node_id": "MDQ6VXNlcjUzNzkzNDg=",
+        "type": "User"
+      },
+      "comments": 0,
+      "review_comments": 0,
+      "commits": 1,
+      "additions": 1,
+      "deletions": 1,
+      "changed_files": 1
+    }
+  },
+  "public": true,
+  "created_at": "2024-11-07T00:13:25Z",
+  "org": {
+    "id": 1525981,
+    "login": "python"
+  }
+}

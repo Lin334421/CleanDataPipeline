@@ -1,0 +1,49 @@
+{
+  "id": "43580455778",
+  "type": "IssuesEvent",
+  "actor": {
+    "id": 187344615,
+    "login": "DhammaNotes"
+  },
+  "repo": {
+    "id": 410679961,
+    "name": "gildas-lormeau/SingleFile-MV3"
+  },
+  "payload": {
+    "action": "opened",
+    "issue": {
+      "id": 2639537716,
+      "node_id": "I_kwDOGHp6mc6dVCY0",
+      "number": 32,
+      "title": "On MD file # Ref links not working, to add would be useful",
+      "user": {
+        "login": "DhammaNotes",
+        "id": 187344615,
+        "node_id": "U_kgDOCyqm5w",
+        "type": "User"
+      },
+      "assignee": {
+        "login": "yanagi-altus5",
+        "id": 77946641,
+        "node_id": "MDQ6VXNlcjc3OTQ2NjQx",
+        "type": "User"
+      },
+      "assignees": [
+        {
+          "login": "yanagi-altus5",
+          "id": 77946641,
+          "node_id": "MDQ6VXNlcjc3OTQ2NjQx",
+          "type": "User"
+        }
+      ],
+      "state": "open",
+      "comments": 0,
+      "created_at": "2024-11-07T00:13:37Z",
+      "updated_at": "2024-11-07T00:13:37Z",
+      "closed_at": "2024-11-07T00:13:37Z",
+      "body": "On saving the following page:\r\nhttps://github.com/ikatyang/emoji-cheat-sheet/blob/master/README.md\r\n\r\nThe internal links that should jump down the page do not work. I do not know if this is a bug or a feature.\r\n\r\nI have had very little issue with the program over many years, so I guess this is a feature request if it doesn't exist.\r\n\r\nGreat work!\r\n"
+    }
+  },
+  "public": true,
+  "created_at": "2024-11-07T00:13:39Z"
+}

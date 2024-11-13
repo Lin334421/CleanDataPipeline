@@ -1,0 +1,63 @@
+{
+  "id": "43580455209",
+  "type": "IssueCommentEvent",
+  "actor": {
+    "id": 143328468,
+    "login": "mrryel"
+  },
+  "repo": {
+    "id": 560307075,
+    "name": "scaarup/aula"
+  },
+  "payload": {
+    "action": "created",
+    "issue": {
+      "id": 2623615948,
+      "node_id": "I_kwDOIWWbg86cYTPM",
+      "number": 191,
+      "title": "Får ingen data fra Aula",
+      "user": {
+        "login": "dennisroenn77",
+        "id": 186812164,
+        "node_id": "U_kgDOCyKHBA",
+        "type": "User"
+      },
+      "assignee": {
+        "login": "yanagi-altus5",
+        "id": 77946641,
+        "node_id": "MDQ6VXNlcjc3OTQ2NjQx",
+        "type": "User"
+      },
+      "assignees": [
+        {
+          "login": "yanagi-altus5",
+          "id": 77946641,
+          "node_id": "MDQ6VXNlcjc3OTQ2NjQx",
+          "type": "User"
+        }
+      ],
+      "state": "open",
+      "comments": 21,
+      "created_at": "2024-10-30T10:33:44Z",
+      "updated_at": "2024-11-07T00:13:37Z",
+      "closed_at": "2024-11-07T00:13:37Z",
+      "body": ""
+
+    },
+    "comment": {
+      "id": 2461058849,
+      "node_id": "IC_kwDOIWWbg86SsMch",
+      "user": {
+        "login": "mrryel",
+        "id": 143328468,
+        "node_id": "U_kgDOCIsE1A",
+        "type": "User"
+      },
+      "created_at": "2024-11-07T00:13:36Z",
+      "updated_at": "2024-11-07T00:13:36Z",
+      "body": "rettede client.py linje= task.get('author', \"\")\r\nugep = ugep + author + \"<br><br>\"_\r\n\r\nog vupti, så virkede det igen. Tak @poulpreben <3"
+    }
+  },
+  "public": true,
+  "created_at": "2024-11-07T00:13:37Z"
+}

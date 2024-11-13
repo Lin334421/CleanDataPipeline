@@ -1,0 +1,56 @@
+{
+  "id": "43580452285",
+  "type": "ForkEvent",
+  "actor": {
+    "id": 157721858,
+    "login": "aaronkr-classroom"
+  },
+  "repo": {
+    "id": 884251244,
+    "name": "aaronkr-classroom/2024-ut-data-am-10-unsupervised-learning-9-unsupervised"
+  },
+  "payload": {
+    "forkee": {
+      "id": 884544375,
+      "node_id": "R_kgDONLkTdw",
+      "name": "10-unsupervised-learning-starman1643",
+      "full_name": "aaronkr-classroom/10-unsupervised-learning-starman1643",
+      "private": false,
+      "owner": {
+        "login": "aaronkr-classroom",
+        "id": 157721858,
+        "node_id": "O_kgDOCWalAg",
+        "type": "Organization"
+      },
+      "description": "2024-ut-data-am-10-unsupervised-learning-9-unsupervised created by GitHub Classroom",
+      "fork": true,
+      "created_at": "2024-11-07T00:13:26Z",
+      "updated_at": "2024-11-07T00:13:27Z",
+      "pushed_at": "2024-11-07T00:11:03Z",
+      "stargazers_count": 0,
+      "watchers_count": 0,
+      "language": "",
+      "forks_count": 0,
+      "archived": false,
+      "disabled": false,
+      "license": {
+        "key": "other",
+        "name": "Other",
+        "spdx_id": "NOASSERTION",
+        "node_id": "MDc6TGljZW5zZTA="
+      },
+      "topics": [""],
+      "forks": 0,
+      "open_issues": 0,
+      "watchers": 0,
+      "default_branch": "main",
+      "public": true
+    }
+  },
+  "public": true,
+  "created_at": "2024-11-07T00:13:27Z",
+  "org": {
+    "id": 157721858,
+    "login": "aaronkr-classroom"
+  }
+}

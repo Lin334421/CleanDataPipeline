@@ -1,2 +1,6 @@
 msg.log
 config/ck_conn.cfg
+src/un_zip.log
+src/msg.log
+tmpl/__pycache__/
+.idea

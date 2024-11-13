@@ -1,0 +1,23 @@
+{
+  "id": "43580491593",
+  "type": "MemberEvent",
+  "actor": {
+    "id": 123339631,
+    "login": "bryandavila"
+  },
+  "repo": {
+    "id": 881631188,
+    "name": "bryandavila/Workspaces"
+  },
+  "payload": {
+    "member": {
+      "login": "Josuezc",
+      "id": 101234495,
+      "node_id": "U_kgDOBgi3Pw",
+      "type": "User"
+    },
+    "action": "added"
+  },
+  "public": true,
+  "created_at": "2024-11-07T00:15:43Z"
+}
