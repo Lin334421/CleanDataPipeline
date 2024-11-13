@@ -250,7 +250,7 @@ def all_event(file_names):
                 "data_insert_at": updated_at
             }]
             insert_into_ck(bulk_data, 'gha_download_insert_state', f'{int(gh_archive_year)}-{int(gh_archive_month)}-{int(gh_archive_day)}-{int(gh_archive_hour)}.json.gz')
-        clean_file(f'{ConfigManager().get_data_parents_dir()}',file_name)
+        # clean_file(f'{ConfigManager().get_data_parents_dir()}',file_name)
 
 
 

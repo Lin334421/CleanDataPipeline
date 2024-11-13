@@ -43,4 +43,4 @@ if __name__ == '__main__':
     with Pool(num_process) as pool:
         pool.map(all_event, tasks)
     # 清理已经处理过的文件
-    clean_files(json_file_list, gz_file_list, directory)
+    # clean_files(json_file_list, gz_file_list, directory)
