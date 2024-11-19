@@ -39,7 +39,7 @@ if __name__ == '__main__':
     # 指定目录
     directory = f"{ConfigManager().get_data_parents_dir()}"
     gz_file_list, json_file_list = list_files(directory)
-    tasks = schedule_task(json_file_list)
+    tasks = schedule_task(json_file_list,num_process)
     with Pool(num_process) as pool:
         pool.map(all_event, tasks)
     # 清理已经处理过的文件

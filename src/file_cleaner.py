@@ -1,11 +1,12 @@
 import os
 
 from src.config_loader import get_ck_client
+from src.table_name import GHA_DOWNLOAD_INSERT_STATE
 
 
 def get_already_inserted_files():
     already_inserted_files = set()
-    sql_ = """
+    sql_ = f"""
         select *
     from (select year,
                  month,
@@ -14,7 +15,7 @@ def get_already_inserted_files():
                  argMax(download_state, data_insert_at) as download_state,
                  argMax(unzip_state, data_insert_at)    as unzip_state,
                  argMax(insert_state, data_insert_at)   as insert_state
-          from gha_download_insert_state
+          from {GHA_DOWNLOAD_INSERT_STATE}
           group by year, month, day, hour)
     where insert_state = 1
         """

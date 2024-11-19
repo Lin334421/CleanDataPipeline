@@ -9,13 +9,14 @@ from multiprocessing import Pool
 
 from src.config_loader import ConfigManager, get_ck_conn_info, get_ck_client
 from src.file_cleaner import clean_file
+from src.table_name import GHA_DOWNLOAD_INSERT_STATE, GITHUB_ACTION_EVENTS
 
 """
 服务于大宽表
 """
 
 
-# logger.add('msg.log')
+logger.add('msg.log')
 
 
 
@@ -25,7 +26,6 @@ from src.file_cleaner import clean_file
 
 
 def insert_into_ck(bulk_data, table_name, file_name=None):
-    # conn_info = get_ck_conn_info('ClickHouseLocal9000')
     ck_client = get_ck_client('ClickHouseLocal9000')
     #
     sql_ = f"INSERT INTO TABLE {table_name} VALUES"
@@ -120,6 +120,9 @@ def all_event(file_names):
                 # 'pull_request_event', 'issues_event', 'issue_comment_event', 'pull_request_review_comment_event'):
 
                 event_tplt = get_event_template(event_type)
+                if not event_tplt:
+                    logger.info(f'{event_type} not found')
+                    continue
                 # print(line)
                 # print(event_type)
                 for event in event_tplt:
@@ -238,7 +241,7 @@ def all_event(file_names):
 
             logger.info(f'文件{file_name} 总解析行数:{count}')
             # print(bulk_data)
-            insert_into_ck(bulk_data, 'github_action_events')
+            insert_into_ck(bulk_data, GITHUB_ACTION_EVENTS)
             bulk_data.clear()
             bulk_state_data = [{
                 "year": int(gh_archive_year),
@@ -250,7 +253,7 @@ def all_event(file_names):
                 "insert_state": 1,
                 "data_insert_at": updated_at
             }]
-            insert_into_ck(bulk_state_data, 'gha_download_insert_state', f'{int(gh_archive_year)}-{int(gh_archive_month)}-{int(gh_archive_day)}-{int(gh_archive_hour)}.json.gz')
+            insert_into_ck(bulk_state_data, GHA_DOWNLOAD_INSERT_STATE, f'{int(gh_archive_year)}-{int(gh_archive_month)}-{int(gh_archive_day)}-{int(gh_archive_hour)}.json.gz')
         # clean_file(f'{ConfigManager().get_data_parents_dir()}',file_name)
 
 

@@ -3,45 +3,18 @@ import os
 import random
 import sys
 import time
-
 import urllib3
-from concurrent.futures import ThreadPoolExecutor, as_completed
 
-from src.config_loader import get_ck_client, ConfigManager
 from src.data_insert import insert_into_ck
-from src.file_cleaner import get_already_inserted_files
 from src.table_name import GHA_DOWNLOAD_INSERT_STATE
 
+
 # 文件名列表
-url_array = []
 
-
-year = 2024
-current_date = datetime.datetime(year, 11, 14, 0)
-until_date = datetime.datetime.utcnow() - datetime.timedelta(hours=1)
-until_date = until_date.replace(minute=0, second=0, microsecond=0)
-
-print(f'{until_date}')
-
-if not os.path.exists(f'./{year}'):
-    os.mkdir(f'./{year}')
-
-already_inserted_files = get_already_inserted_files()
-
-while current_date < until_date:
-    current_date_str = current_date.strftime('%Y-%m-%d-%-H')
-    download_url = f'https://data.gharchive.org/{current_date_str}.json.gz'
-    if current_date_str + '.json' not in already_inserted_files:
-        url_array.append(download_url)
-    current_date = current_date + datetime.timedelta(hours=1)
-
-print(url_array)
-failed_urls = []
-http = urllib3.PoolManager(num_pools=50)
-url_array = url_array[:2]
 
 def download_gha_archive(gha_url, file_parent_path='./'):
-    global year
+    http = urllib3.PoolManager(num_pools=50)
+    failed_urls = []
     req = None
     data_insert_at = int(time.time() * 1000)
     file_name = gha_url.split('/')[-1]
@@ -54,7 +27,7 @@ def download_gha_archive(gha_url, file_parent_path='./'):
     file_path = file_parent_path + f'/{file_name}'
     is_successfully_downloaded = False
     if not os.path.exists(file_parent_path):
-        os.mkdir(file_parent_path )
+        os.mkdir(file_parent_path)
     try:
         print(f'download {gha_url}')
         req = http.request('GET', gha_url, preload_content=False, retries=3)
@@ -80,6 +53,7 @@ def download_gha_archive(gha_url, file_parent_path='./'):
             os.remove(file_path)
         else:
             is_successfully_downloaded = True
+            print(f'successfully downloaded {file_name}')
 
     except urllib3.exceptions.HTTPError as e:
         print('HTTPError::', e)
@@ -106,13 +80,3 @@ def download_gha_archive(gha_url, file_parent_path='./'):
     }
     ]
     insert_into_ck(bulk_data, GHA_DOWNLOAD_INSERT_STATE, file_name)
-
-
-root_path = ConfigManager().get_data_parents_dir()
-
-with ThreadPoolExecutor(max_workers=5) as executor:
-    futures = []
-    for download_url in url_array:
-        futures.append(executor.submit(download_gha_archive, download_url, root_path))
-    for future in futures:
-        future.result()

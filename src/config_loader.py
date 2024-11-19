@@ -26,7 +26,7 @@ class ConfigManager:
             current_dir = os.path.dirname(__file__)
             parent_dir = os.path.abspath(os.path.join(current_dir, os.pardir))
             config_file_path = f'{parent_dir}/config/ck_conn.cfg'
-            print(config_file_path)
+            # print(config_file_path)
             cls._instance.config.read(config_file_path)
             cls._instance.data_parents_dir = cls._instance.config['DATA_PATH']['parents_dir']
         return cls._instance
