@@ -12,7 +12,7 @@ from src.table_name import GHA_DOWNLOAD_INSERT_STATE
 # 文件名列表
 
 
-def download_gha_archive(gha_url, file_parent_path='./'):
+def download_gha_archive(gha_url, file_parent_path='./',proxy_url=None):
     http = urllib3.PoolManager(num_pools=50)
     failed_urls = []
     req = None
@@ -30,7 +30,8 @@ def download_gha_archive(gha_url, file_parent_path='./'):
         os.mkdir(file_parent_path)
     try:
         print(f'download {gha_url}')
-        req = http.request('GET', gha_url, preload_content=False, retries=3)
+
+        req = http.request('GET', gha_url, preload_content=False, retries=5)
         chunk_size = 1024 * 1024
         is_file_empty = True
         with open(file_path, 'wb') as out:
@@ -60,7 +61,8 @@ def download_gha_archive(gha_url, file_parent_path='./'):
     except ValueError as e:
         print('failed to handle value', e)
     except Exception as e:
-        print(e)
+        print(gha_url)
+        raise e
     finally:
         if not is_successfully_downloaded:
             if os.path.exists(file_path):
