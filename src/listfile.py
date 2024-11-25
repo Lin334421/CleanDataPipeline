@@ -1,4 +1,5 @@
 import math
+from loguru import logger
 import os
 import re
 import shutil
@@ -22,6 +23,7 @@ def schedule_task(json_file_list,num_process=10):
     already_inserted_files = get_already_inserted_files()
     need_parse_files = list(json_file_list - already_inserted_files)
     tasks = []
+    logger.info(f"文件个数：{len(need_parse_files)}")
     if len(need_parse_files) < num_process:
         tasks = [[file] for file in need_parse_files]
     else:
@@ -40,7 +42,8 @@ if __name__ == '__main__':
     directory = f"{ConfigManager().get_data_parents_dir()}"
     gz_file_list, json_file_list = list_files(directory)
     tasks = schedule_task(json_file_list,num_process)
-    with Pool(num_process) as pool:
-        pool.map(all_event, tasks)
+    print(tasks)
+    # with Pool(num_process) as pool:
+    #     pool.map(all_event, tasks)
     # 清理已经处理过的文件
     # clean_files(json_file_list, gz_file_list, directory)

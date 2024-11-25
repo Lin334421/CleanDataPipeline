@@ -12,7 +12,7 @@ from src.table_name import GHA_DOWNLOAD_INSERT_STATE
 # 文件名列表
 
 
-def download_gha_archive(gha_url, file_parent_path='./',proxy_url=None):
+def download_gha_archive(gha_url, file_parent_path='./'):
     http = urllib3.PoolManager(num_pools=50)
     failed_urls = []
     req = None

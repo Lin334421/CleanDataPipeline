@@ -1,6 +1,7 @@
 import datetime
+import os
 import time
-
+from loguru import logger
 from src.clean_gha_v2 import all_event
 from src.config_loader import get_ck_client, ConfigManager
 from concurrent.futures import ThreadPoolExecutor
@@ -9,6 +10,7 @@ from src.data_download_v2 import download_gha_archive
 from src.listfile import list_files, schedule_task
 from src.table_name import GITHUB_ACTION_EVENTS
 from src.unzip_process import unzip_data
+from utils.un_zip_data import un_gzip_v2
 
 
 # 测试表github_action_events_beta
@@ -33,9 +35,9 @@ def get_last_update_time():
     return year,month,day,hour
 
 def task_func():
+    logger.info(f"更新任务")
     root_path = ConfigManager().get_data_parents_dir()
 
-    # 转移数据
     year, month, day, hour = get_last_update_time()
     current_date = datetime.datetime(year, month, day, hour) + datetime.timedelta(hours=1)
     until_date = datetime.datetime.utcnow() - datetime.timedelta(hours=1)
@@ -51,9 +53,11 @@ def task_func():
             # print(current_date_str)
             url_array.append(download_url)
         current_date = current_date + datetime.timedelta(hours=1)
+    print(f"总需要更新的文件个数{len(url_array)}")
 
-    url_array = url_array[:1]
+    url_array = url_array[:5]
     print(url_array)
+    print(f"当前需要更新的文件个数{len(url_array)}")
     with ThreadPoolExecutor(max_workers=5) as executor:
         futures = []
         for download_url in url_array:
@@ -61,14 +65,26 @@ def task_func():
         for future in futures:
             future.result()
     time.sleep(2)
+    # 解压
     unzip_data()
     num_process = 5
     # 指定目录
     directory = f"{ConfigManager().get_data_parents_dir()}"
     gz_file_list, json_file_list = list_files(directory)
+    need_unzip_files = [file for file in gz_file_list if file[:-3] not in json_file_list]
+    for file in need_unzip_files:
+        un_gzip_v2(file)
+    time.sleep(2)
+    # 多进程插入
     tasks = schedule_task(json_file_list)
-    with Pool(num_process) as pool:
-        pool.map(all_event, tasks)
+
+    with ThreadPoolExecutor(max_workers=5) as executor:
+        futures = []
+        for task in tasks:
+            futures.append(executor.submit(all_event,task))
+        for future in futures:
+            future.result()
+    logger.info("任务执行完成")
 
 # 下载
 
