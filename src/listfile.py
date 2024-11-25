@@ -48,7 +48,7 @@ if __name__ == '__main__':
     gz_file_list, json_file_list = list_files(directory)
     tasks = schedule_task(json_file_list, num_process)
     print(tasks)
-    # with Pool(num_process) as pool:
-    #     pool.map(all_event, tasks)
+    with Pool(num_process) as pool:
+        pool.map(all_event, tasks)
     # 清理已经处理过的文件
     # clean_files(json_file_list, gz_file_list, directory)
