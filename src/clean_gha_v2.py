@@ -241,7 +241,11 @@ def all_event(file_names):
 
             logger.info(f'文件{file_name} 总解析行数:{count}')
             # print(bulk_data)
-            count = insert_into_ck(bulk_data, GITHUB_ACTION_EVENTS)
+            try:
+                count = insert_into_ck(bulk_data, GITHUB_ACTION_EVENTS)
+            except AttributeError as e:
+                logger.error(f'插入失败跳过当前文件的插入{file_name} {e}')
+                continue
             bulk_data.clear()
             if count != 0:
                 bulk_state_data = [{
