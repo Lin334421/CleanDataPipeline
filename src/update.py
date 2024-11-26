@@ -34,7 +34,7 @@ def get_last_update_time():
     hour = results[0][4]
     return year,month,day,hour
 
-def task_func():
+def download_and_unzip():
     logger.info(f"更新任务")
     root_path = ConfigManager().get_data_parents_dir()
 
@@ -55,7 +55,7 @@ def task_func():
         current_date = current_date + datetime.timedelta(hours=1)
     print(f"总需要更新的文件个数{len(url_array)}")
 
-    url_array = url_array[:5]
+    url_array = url_array[:1]
     print(url_array)
     print(f"当前需要更新的文件个数{len(url_array)}")
     with ThreadPoolExecutor(max_workers=5) as executor:
@@ -78,13 +78,14 @@ def task_func():
     # 多进程插入
     tasks = schedule_task(json_file_list)
 
-    with ThreadPoolExecutor(max_workers=5) as executor:
-        futures = []
-        for task in tasks:
-            futures.append(executor.submit(all_event,task))
-        for future in futures:
-            future.result()
-    logger.info("任务执行完成")
+    # with ThreadPoolExecutor(max_workers=5) as executor:
+    #     futures = []
+    #     for task in tasks:
+    #         futures.append(executor.submit(all_event,task))
+    #     for future in futures:
+    #         future.result()
+    # logger.info("任务执行完成")
+    all_event(tasks[0])
 
 # 下载
 
