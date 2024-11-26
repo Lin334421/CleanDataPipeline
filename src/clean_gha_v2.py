@@ -246,8 +246,8 @@ def all_event(file_names):
             except AttributeError as e:
                 logger.error(f'插入失败跳过当前文件的插入{file_name} {e}')
                 # 重命名文件
-                os.rename(file_name, file_name+'.bak')
-                os.rename(file_name+'.gz', file_name+'.gz' + '.bak')
+                os.rename(f'{ConfigManager().get_data_parents_dir()}/{file_name}', f'{ConfigManager().get_data_parents_dir()}/{file_name}'+'.bak')
+                os.rename(f'{ConfigManager().get_data_parents_dir()}/{file_name}'+'.gz', f'{ConfigManager().get_data_parents_dir()}/{file_name}'+'.gz.bak')
                 continue
             bulk_data.clear()
             if count != 0:
